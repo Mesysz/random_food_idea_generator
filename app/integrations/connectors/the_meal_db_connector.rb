@@ -14,7 +14,6 @@ module Connectors
       meal = Parsers::TheMealDbParser.new(response.body).to_meals.first
 
       @redis.set_key(redis_key(meal.meal_id), meal.to_json)
-      binding.pry
 
       meal
     end
