@@ -1,0 +1,16 @@
+<%= link_to 'Back', root_path %>
+<%= simple_form_for :filters, { url: favorites_path, method: :get } do |f| %>
+  <%= f.select :category, @favorites.map { |fav| [fav.category, fav.category] }.uniq, include_blank: true %>
+  <%= f.button :submit, 'Filter' %>
+<% end %>
+<% @favorites.each do |favorite| %>
+  <br><%= favorite.name %>
+  <br><%= favorite.category %>
+  <br><%= favorite.description %>
+  <%= form_tag remove_meal_path(saved_meal_id: favorite.id), method: :post do %>
+    <%= submit_tag('remove') %>
+  <% end %>
+  <br>
+  <br>
+<% end %>
+

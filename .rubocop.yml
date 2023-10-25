@@ -1,0 +1,20 @@
+require:
+  - rubocop-rails
+  - rubocop-rspec
+AllCops:
+  NewCops: enable
+  Exclude: 
+    - 'lib/**/*'
+    - 'db/**/*'
+    - 'bin/**/*'
+    - 'config/**/*'
+Documentation:
+  Enabled: false
+BlockLength:
+  Enabled: false
+NamedSubject:
+  Enabled: false
+VerifiedDoubles:
+  Enabled: false
+ExampleLength:
+  Enabled: false
