@@ -1,16 +1,31 @@
-<%= link_to 'Back', root_path %>
-<%= simple_form_for :filters, { url: favorites_path, method: :get } do |f| %>
-  <%= f.select :category, @favorites.map { |fav| [fav.category, fav.category] }.uniq, include_blank: true %>
-  <%= f.button :submit, 'Filter' %>
-<% end %>
-<% @favorites.each do |favorite| %>
-  <br><%= favorite.name %>
-  <br><%= favorite.category %>
-  <br><%= favorite.description %>
-  <%= form_tag remove_meal_path(saved_meal_id: favorite.id), method: :post do %>
-    <%= submit_tag('remove') %>
+<h1>Your favorites</h1>
+<%= link_to 'Back', root_path, class: 'button blue' %>
+<div class='filters'>
+  <%= simple_form_for :filters, { url: favorites_path, method: :get } do |f| %>
+    <%= f.select :category, @favorites.map { |fav| [fav.category, fav.category] }.uniq, include_blank: true %>
+    <%= f.button :submit, 'Filter', class: 'button blue' %>
   <% end %>
-  <br>
-  <br>
-<% end %>
+</div>
+<div class='favorites-table'>
+  <table>
+    <tr>
+      <th>Meal name</th>
+      <th>Category</th>
+      <th>Description</th>
+      <th>Remove from favorites</th>
+    </tr>
+    <% @favorites.each do |favorite| %>
+      <tr>
+        <td><%= favorite.name %></td>
+        <td><%= favorite.category %></td>
+        <td><%= favorite.description %></td>
+        <td>
+          <%= form_tag remove_meal_path(saved_meal_id: favorite.id), method: :post do %>
+            <%= submit_tag 'remove', class: 'button red' %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+</div>
 
